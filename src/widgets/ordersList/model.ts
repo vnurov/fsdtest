@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import orderModel, { type Order } from '../../entities/order/model'
 
 export default defineStore<any, any>('ordersList', {
   state() {
@@ -12,12 +13,8 @@ export default defineStore<any, any>('ordersList', {
       })
     },
 
-    confirmOrder(id: any) {
-      const order = this.orders.find((o: any) => o.id === id)
-      if (order) {
-        order.confirmed = true
-        console.log('call API for confirm')
-      }
+    confirmOrder(order: Order) {
+      orderModel().confirmOrder(order)
     }
   }
 })

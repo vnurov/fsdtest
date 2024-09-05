@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import orderModel, { type Order } from '../../entities/order/model'
 export default defineStore<any, any>('orderPreview', {
   state() {
     return { order: undefined, chat: undefined }
@@ -12,12 +12,8 @@ export default defineStore<any, any>('orderPreview', {
       })
     },
 
-    confirmOrder(id: any) {
-      const order = this.order.id === id
-      if (order) {
-        this.order.confirmed = true
-        console.log('call API for confirm')
-      }
+    confirmOrder(order: Order) {
+      orderModel().confirmOrder(order)
     }
   }
 })
